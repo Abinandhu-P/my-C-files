@@ -1,89 +1,31 @@
 #include<stdio.h>
 #include<stdlib.h>
-struct node {
-	int data1;
-	struct node *list;
-};
-struct node *createnode(int data)	
-{
-	struct node *newnode = (struct node*)malloc(sizeof(struct node));
-	newnode->data1= data;
-	newnode->list = NULL;
-	
- return newnode;
-  
-	
-}
-
-struct node *initilization(struct node *head,int data)
-{
-  struct node *newnode = createnode(data);
-  newnode->list=head;
-  return newnode;
-  
-  
-  }
-struct node *add_last(struct node* head1,int date){
- struct node *newnode = createnode(date);
- if(head1==NULL)
-	{
-	return newnode;
-	}
-	struct node* temp = head1;
-	while(temp->list!=NULL){
-		temp = temp->list;
-	}
-	temp->list = newnode;
- 	return head1;
- }
- 
- void printList(struct Node* head) {
-    struct node* temp = head;
-    while (temp != NULL) {
-        printf("%d ", temp->data1);
-        temp = temp->list;
-    }
-    printf("\n");
-}
-  
-  
-
+#include<string.h>
+#include<ctype.h>
 int main()
 {
-	struct node *head = NULL;
-	struct node *head1= NULL;
-	int data, size,date;
-	//scanf("%d ", &size);
-	int i;
-	do {
-        printf("\nMenu:\n");
-        printf("1. Insert at beginning\n");
-        printf("2. Insert at end\n");
-        printf("3. Print list\n");
-        printf("4 or more. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &size);
+	char str[100];
+	FILE *ptr;
+       ptr =fopen("abc.txt","w");
+     // int fputs( *str,*ptr);
+	scanf("%[^\n]",str);
+      fprintf(ptr,"%s",str);
+      fclose(ptr);
+      fopen("abc.txt","a");
+      for(int i=0;i!=strlen(str);i++)
+      {
+	      if(islower(str[i]))
+	      {
+		      str[i]=toupper(str[i]);
+	      }
+	      else if(isupper(str[i]))
+		      str[i]=tolower(str[i]);
+	      else if(isspace(str[i]))
+		      str[i]= str[i];
+      }
+            fprintf(ptr,"%s",str);
+      printf("%s\n",str);
+	fclose(ptr);
 	
-	  switch (size) {
-            case 1:{
-                printf("Enter data: ");
-                scanf("%d", &data);
-                head = initilization(head,data);
-                printf("entered data: ");
-                printList(head);
-                break;
-                }
-            case 2:{
-                printf("Enter data: ");
-                scanf("%d", &date);
-                head1 = add_last(head1,date);
-                printList(head1);
-                break;
-                }
-            }
-	}
-	while(size <4);
-
 
 }
-
